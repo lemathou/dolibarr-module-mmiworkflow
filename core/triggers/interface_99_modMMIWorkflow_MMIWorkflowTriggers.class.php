@@ -15,7 +15,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-dol_include_once('custom/mmicommon/class/MMITriggers.class.php');
+dol_include_once('custom/mmicommon/core/triggers/MMITriggers.class.php');
 dol_include_once('/custom/mmiworkflow/class/mmi_workflow.class.php');
 
 /**
