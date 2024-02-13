@@ -118,6 +118,7 @@ class modMMIWorkflow extends DolibarrModules
 				'invoicecard',
 				'ordercard',
 				'pdfgeneration',
+				'shipmentlist'
 				//   'data' => array(
 				//       'hookcontext1',
 				//       'hookcontext2',
@@ -139,7 +140,7 @@ class modMMIWorkflow extends DolibarrModules
 		// A condition to hide module
 		$this->hidden = false;
 		// List of module class names as string that must be enabled if this module is enabled. Example: array('always1'=>'modModuleToEnable1','always2'=>'modModuleToEnable2', 'FR1'=>'modModuleToEnableFR'...)
-		$this->depends = array('modMMICommon');
+		$this->depends = array('modMMICommon', 'modMMIPayments');
 		$this->requiredby = array(); // List of module class names as string to disable if this one is disabled. Example: array('modModuleToDisable1', ...)
 		$this->conflictwith = array(); // List of module class names as string this module is in conflict with. Example: array('modModuleToDisable1', ...)
 
@@ -266,6 +267,16 @@ class modMMIWorkflow extends DolibarrModules
 		$this->rights = array();
 		$r = 0;
 		// Add here entries to declare new permissions
+		$this->rights[$r][0] = $this->numero . sprintf("%02d", $r + 1); // Permission id (must not be already used)
+		$this->rights[$r][1] = 'Réouvrir les commandes expédiées'; // Permission label
+		$this->rights[$r][4] = 'commande';
+		$this->rights[$r][5] = 'draftify';
+		$r++;
+		$this->rights[$r][0] = $this->numero . sprintf("%02d", $r + 1); // Permission id (must not be already used)
+		$this->rights[$r][1] = 'Réouvrir les factures expédiées'; // Permission label
+		$this->rights[$r][4] = 'facture';
+		$this->rights[$r][5] = 'draftify';
+		$r++;
 		/* BEGIN MODULEBUILDER PERMISSIONS */
 		/*
 		$this->rights[$r][0] = $this->numero . sprintf("%02d", $r + 1); // Permission id (must not be already used)
@@ -424,13 +435,23 @@ class modMMIWorkflow extends DolibarrModules
 		}
 
 		// Create extrafields during init
-		//include_once DOL_DOCUMENT_ROOT.'/core/class/extrafields.class.php';
-		//$extrafields = new ExtraFields($this->db);
-		//$result1=$extrafields->addExtraField('mmiworkflow_myattr1', "New Attr 1 label", 'boolean', 1,  3, 'thirdparty',   0, 0, '', '', 1, '', 0, 0, '', '', 'mmiworkflow@mmiworkflow', '$conf->mmiworkflow->enabled');
-		//$result2=$extrafields->addExtraField('mmiworkflow_myattr2', "New Attr 2 label", 'varchar', 1, 10, 'project',      0, 0, '', '', 1, '', 0, 0, '', '', 'mmiworkflow@mmiworkflow', '$conf->mmiworkflow->enabled');
-		//$result3=$extrafields->addExtraField('mmiworkflow_myattr3', "New Attr 3 label", 'varchar', 1, 10, 'bank_account', 0, 0, '', '', 1, '', 0, 0, '', '', 'mmiworkflow@mmiworkflow', '$conf->mmiworkflow->enabled');
-		//$result4=$extrafields->addExtraField('mmiworkflow_myattr4', "New Attr 4 label", 'select',  1,  3, 'thirdparty',   0, 1, '', array('options'=>array('code1'=>'Val1','code2'=>'Val2','code3'=>'Val3')), 1,'', 0, 0, '', '', 'mmiworkflow@mmiworkflow', '$conf->mmiworkflow->enabled');
-		//$result5=$extrafields->addExtraField('mmiworkflow_myattr5', "New Attr 5 label", 'text',    1, 10, 'user',         0, 0, '', '', 1, '', 0, 0, '', '', 'mmiworkflow@mmiworkflow', '$conf->mmiworkflow->enabled');
+		include_once DOL_DOCUMENT_ROOT.'/core/class/extrafields.class.php';
+		$extrafields = new ExtraFields($this->db);
+
+		// @ déplacer mmiworkflow + triggers & co
+
+		// Commande
+        $extrafields->addExtraField('expe_ok', $langs->trans('Extrafield_expe_ok'), 'boolean', 100, '', 'commande', 0, 0, '', "", 1, '', 5, $langs->trans('ExtrafieldToolTip_expe_ok'), '', $conf->entity, 'mmiworkflow@mmiworkflow', '$conf->mmiworkflow->enabled');
+
+		// Commande Fournisseur
+        $extrafields->addExtraField('recpt_ok', $langs->trans('Extrafield_recpt_ok'), 'boolean', 100, '', 'commande_fournisseur', 0, 0, '', "", 1, '', 5, $langs->trans('ExtrafieldToolTip_recpt_ok'), '', $conf->entity, 'mmiworkflow@mmiworkflow', '$conf->mmiworkflow->enabled');
+		
+		// thirdparty
+		$result1=$extrafields->addExtraField('pro', "Extrafield_client_pro", 'boolean', 1,  1, 'thirdparty',   0, 0, '0', '', 1, '', 1, 0, '', '', 'mmiworkflow@mmiworkflow', '$conf->mmiworkflow->enabled && $conf->global->SFYCUSTOM_FIELD_CLIENT_PRO');
+		$result1=$extrafields->addExtraField('invoice_noautosend', "Extrafield_invoice_noautosend", 'boolean', 1,  1, 'thirdparty',   0, 0, '0', '', 1, '', 1, 0, '', '', 'mmiworkflow@mmiworkflow', '$conf->mmiworkflow->enabled');
+
+		// facture
+		$result1=$extrafields->addExtraField('emailsent', "Extrafield_emailsent", 'boolean', 1,  1, 'facture',   0, 0, '1', '', 1, '', 1, 0, '', '', 'mmiworkflow@mmiworkflow', '$conf->mmiworkflow->enabled');
 
 		// Permissions
 		$this->remove($options);

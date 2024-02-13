@@ -1,0 +1,97 @@
+# Copyright (C) 2022 Mathieu Moulin <mathieu@iprospective.fr>
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+#
+# Generic
+#
+
+# Module label 'ModuleMMIWorkflowName'
+ModuleMMIWorkflowName = Amélioration Workflow
+# Module description 'ModuleMMIWorkflowDesc'
+ModuleMMIWorkflowDesc = Ensemble de paramètres et aléliorations du workflow  Devis/Commande/Facture/Expé, expédition/facturation en 1 clic, facturation à la livraison, envoi automatique de facture par email, etc.
+
+#
+# Admin page
+#
+MMIWorkflowSetup = MMIWorkflow setup
+Settings = Settings
+MMIWorkflowSetupPage = MMIWorkflow setup page
+
+SFYCUSTOM_FIELD_CLIENT_PRO = Champ "Professionnel" sur fiche client
+MMI_ORDER_1CLIC_INVOICE_SHIPPING = Expédition (et facture) en 1 clic
+MMI_ORDER_1CLIC_INVOICE_SHIPPING_AUTOCLOSE = Clôturer l'expé automatiquement
+MMI_ORDER_1CLIC_INVOICE = Facturer automatiquement (par défaut à l'expédition)
+MMI_ORDER_1CLIC_INVOICE_DELAY = Décaler la facturation à la livraison
+MMI_ORDER_1CLIC_INVOICE_EMAIL_AUTO = Envoyer automatiquement la facture par email
+MMI_ORDER_1CLIC_INVOICE_EMAIL_AUTO_NOPRO = Ne pas envoyer la facture automatiquement pour les pro
+MMI_SHIPPING_PDF_MESSAGE = Message à afficher en en-tête des expéditions
+MAIN_GENERATE_SHIPMENT_WITH_PICTURE = Afficher les images sur les PDF des expéditions
+SHIPPING_PDF_HIDE_BATCH = Cacher le numéro de lot dans les expéditions
+SHIPPING_PDF_HIDE_WEIGHT_AND_VOLUME = Cacher la colonne poids/volume dans les expéditions
+SHIPPING_PDF_HIDE_DELIVERY_DATE = Cacher la date de livraison dans les expéditions
+SHIPPING_PDF_ANTIGASPI = Afficher anti-gaspi sur les expéditions
+MMI_INVOICE_DRAFTIFY = Permettre aux admin de remettre les factures payées en brouillon
+MMI_INVOICE_DRAFTIFY_TYPES = Types de factures que l'on peut remettre en brouillon
+MMI_ORDER_DRAFTIFY = Permettre aux admin de remettre les commandes expédiées en brouillon
+MMI_INVOICE_EMAILSEND = Bouton pour envoyer des factures par email directement
+MMI_1CT_FIX = Bouton pour corriger les erreurs de "1ct"
+MMI_1CT_DIFFLIMIT = Seuil de tolérance (3ct par défaut) pour recalculer les lignes de commande/facture et faire matcher avec le réglement (0.03 conseillé, correspondant à la totalité des bugs liés à Prestashop)
+MMI_VAT_TX_FIX = Bouton pour corriger les erreurs de synchro de TVA
+SFY_ALERT_ORDER_NOT_SHIPPED = Activer une alerte sur la liste des expeditions si il existe des commandes validées
+MMI_MOVEMENT_LIST_ENHANCE = AJouter des informations (client, commande...) dans le liste des mouvements de stock
+SFYCUSTOM_LOCK = Bloquer la validation des commandes si lignes libres
+
+#
+# Extrafields
+#
+Extrafield_recpt_ok = Reçu tout
+Extrafield_expe_ok = Expédié tout
+Extrafield_client_pro = Professionnel
+Extrafield_emailsent = Envoyé par email
+Extrafield_invoice_noautosend = Ne pas envoyer automatiquement les factures
+
+#
+# About page
+#
+About = About
+MMIWorkflowAbout = About MMIWorkflow
+MMIWorkflowAboutPage = MMIWorkflow about page
+
+#
+# Sample page
+#
+MyPageName = My page name
+
+#
+# Sample widget
+#
+MyWidget = My widget
+MyWidgetDescription = My widget description
+
+#
+# Boutons
+#
+MMIInvoiceDraftify = Réouvrir en Brouillon
+MMI1ClickOrderInvoiceShipping = 1 Clic Facture & Expé
+MMI1ClickOrderInvoiceShippingConfirm = Êtes-vous certain de vouloir FActurer et Expédier ?
+MMIInvoiceEmailSend = Envoi express email
+MMI1ctFix = Fix Bug 1ct
+
+#
+# Messages
+#
+OrderInValidatedStatusAlert=Certaines commandes n'ont pas d'expédition: %s
+ErrorProductStockUnavailable = Stock insuffisant pour le produit : %s
+SfCstCannotValidWithFreeLine = Ligne(s) libre(s) !! Non autorisé(s) pour validation
