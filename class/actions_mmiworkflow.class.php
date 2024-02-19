@@ -94,14 +94,25 @@ class ActionsMMIWorkflow extends MMI_Actions_1_0
 				}
 			}
 			// Fix bug 1ct Presta & co
-			if ($conf->global->MMI_1CT_FIX) {
+			if (!empty($conf->global->MMI_1CT_FIX)) {
 				$link = '?id='.$object->id.'&action=1ct_fix';
 				echo "<a class='butAction' href='".$link."'>".$langs->trans("MMI1ctFix")."</a>";
 			}
 			// Fix bug TVA Presta & co
-			if ($conf->global->MMI_VAT_TX_FIX) {
+			if (!empty($conf->global->MMI_VAT_TX_FIX)) {
 				$link = '?id='.$object->id.'&action=vat_tx_fix';
 				echo "<a class='butAction' href='".$link."'>".$langs->trans("MMIVATTxFix")."</a>";
+			}
+			// Marquer expédié tout
+			if (!empty($conf->global->MMI_ORDER_SET_EXPE_OK) && (int)$object->status>=Commande::STATUS_VALIDATED && empty(
+				$object->array_options['options_expe_ok'])) {
+				$link = '?id='.$object->id.'&action=expe_ok';
+				// Test si déjà facture
+				// Test si déjà expédition
+				if ($user->rights->expedition->creer)
+					echo "<a class='butAction' href='".$link."'>".$langs->trans("MMISetExpeOK")."</a>";
+				else
+					echo "<span class='butActionRefused classfortooltip' title='".$langs->trans("MMISetExpeOKNotRight")."'>".$langs->trans("MMISetExpeOK")."</span>";
 			}
 		}
 		// Fiche Facture
@@ -168,6 +179,7 @@ class ActionsMMIWorkflow extends MMI_Actions_1_0
 
 		// Commande
 		if ($this->in_context($parameters, 'ordercard')) {
+			/** @var Commande $object */
 			// 1 click invoice shipping
 			if ($action === '1clic_invoice_shipping') {
 				if ($conf->global->MMI_ORDER_1CLIC_INVOICE_SHIPPING) {
@@ -202,6 +214,13 @@ class ActionsMMIWorkflow extends MMI_Actions_1_0
 			if ($action === 'vat_tx_fix') {
 				if ($conf->global->MMI_VAT_TX_FIX) {
 					mmi_workflow::order_vat_tx_fix($user, $object);
+				}
+			}
+			// Marquer expe ok
+			if ($action === 'expe_ok') {
+				if ($user->rights->expedition->creer) {
+					$object->array_options['options_expe_ok'] = 1;
+					$ret = $object->update($user);
 				}
 			}
 		}
