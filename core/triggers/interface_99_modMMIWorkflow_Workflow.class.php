@@ -119,6 +119,7 @@ class InterfaceWorkflow extends DolibarrTriggers
 			case 'ORDER_SUPPLIER_VALIDATE':
 			case 'ORDER_SUPPLIER_APPROVE':
 			case 'ORDER_SUPPLIER_DISPATCH':
+			case 'ORDER_SUPPLIER_RECEIVE':
 				//var_dump($object); die();
 				mmi_workflow::commande_four_reception($object->id);
 				break;
@@ -152,4 +153,3 @@ class InterfaceWorkflow extends DolibarrTriggers
 	}
 }
 
-InterfaceWorkflow::__init();
