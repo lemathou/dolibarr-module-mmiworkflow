@@ -189,6 +189,7 @@ class InterfaceWorkflow extends DolibarrTriggers
 			//case 'ORDER_SUPPLIER_CANCEL':
 			//case 'ORDER_SUPPLIER_SENTBYMAIL':
 			case 'ORDER_SUPPLIER_DISPATCH':
+			case 'ORDER_SUPPLIER_RECEIVE':
 				//var_dump($object); die();
 				mmi_workflow::commande_four_reception($object->id);
 				break;
@@ -348,4 +349,3 @@ class InterfaceWorkflow extends DolibarrTriggers
 	}
 }
 
-InterfaceWorkflow::__init();
