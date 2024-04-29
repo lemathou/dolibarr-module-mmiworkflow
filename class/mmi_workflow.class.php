@@ -58,13 +58,7 @@ class mmi_workflow extends mmi_generic_1_0
 
 		// Génération PDF
 		if ($invoice_gen) {
-			// @todo : dégueu
-			if (file_exists($filename=DOL_DATA_ROOT.'/doctemplates/invoices/CALICOTE_FACTURE.odt'))
-				$docmodel = 'generic_invoice_odt:'.$filename;
-			elseif (file_exists($filename=DOL_DATA_ROOT.'/doctemplates/invoices/PISCEEN_FACTURE.odt'))
-				$docmodel = 'generic_invoice_odt:'.$filename;
-			else
-				$docmodel = $invoice->model_pdf;
+			$docmodel = $invoice->model_pdf;
 			$hidedetails = 0;
 			$hidedesc = 0;
 			$hideref = 0;
