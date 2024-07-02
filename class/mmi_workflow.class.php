@@ -252,7 +252,7 @@ class mmi_workflow extends mmi_generic_1_0
 		//var_dump($thirdparty->nom); die();
 		$_POST['receiver'] = $thirdparty->nom.' <'.$thirdparty->email.'>';
 		//var_dump($_POST['receiver']); die();
-		$_POST['fromtype'] = 'company'; // @todo modifier ! mettre le responsable du client
+		$_POST['fromtype'] = 'company'; // @todo modifier ! mettre le responsable du client s'il y en a un !
 		$_POST['subject'] = 'Votre facture '.$conf->global->MAIN_INFO_SOCIETE_NOM;
 		$_POST['message'] = 'Bonjour '.$thirdparty->nom.",\r\n\r\n"
 			.'Veuillez trouver ci-joint la facture de votre dernier achat chez '.$conf->global->MAIN_INFO_SOCIETE_NOM.','."\r\n"
