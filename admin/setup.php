@@ -46,6 +46,7 @@ $arrayofparameters = array(
 	'SHIPPING_PDF_ANTIGASPI'=>array('type'=>'yesno','enabled'=>1), // MMI Hack
 	'MAIN_GENERATE_SHIPMENT_WITH_PICTURE'=>array('type'=>'yesno','enabled'=>1),
 	'MMI_SHIPPING_PDF_MESSAGE'=>array('type'=>'html','enabled'=>1),
+	'MMI_SHIPPING_PDF_LABEL_BOLD'=>array('type'=>'yesno','enabled'=>1),
 	'MMI_ORDER_SET_EXPE_OK'=>array('type'=>'yesno','enabled'=>1),
 
 	'MMI_INVOICE_DRAFTIFY'=>array('type'=>'yesno', 'enabled'=>1),

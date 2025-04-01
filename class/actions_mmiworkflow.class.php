@@ -324,13 +324,15 @@ class ActionsMMIWorkflow extends MMI_Actions_1_0
 
 		$object_type = get_class($object);
 		//var_dump($object_type); die();
-
-		if ($this->in_context($parameters, 'pdfgeneration') && $object_type=='Expedition') {
+		if (!empty($conf->global->MMI_SHIPPING_PDF_LABEL_BOLD) && $this->in_context($parameters, 'pdfgeneration') && $object_type=='Expedition') {
 			$i = $parameters['i'];
 			//$object = $parameters['object'];
-			$object->lines[$i]->ref = '<b>'.$object->lines[$i]->ref.'</b>';
-			$object->lines[$i]->product_ref = '<b>'.$object->lines[$i]->product_ref.'</b>';
-			$object->lines[$i]->label = '<b>'.$object->lines[$i]->label.'</b>';
+			if ($object->lines[$i]->ref)
+				$object->lines[$i]->ref = '<b>'.$object->lines[$i]->ref.'</b>';
+			if ($object->lines[$i]->product_ref)
+				$object->lines[$i]->product_ref = '<b>'.$object->lines[$i]->product_ref.'</b>';
+			if ($object->lines[$i]->label)
+				$object->lines[$i]->label = '<b>'.$object->lines[$i]->label.'</b>';
 			//var_dump($object->lines[$i]->label); die();
 			//var_dump($object->lines[$i]); die();
 			//var_dump('yo'); die();
