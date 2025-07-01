@@ -26,7 +26,6 @@ ModuleMMIWorkflowDesc = Ensemble de paramètres et aléliorations du workflow  D
 # Admin page
 #
 MMIWorkflowSetup = MMIWorkflow setup
-Settings = Settings
 MMIWorkflowSetupPage = MMIWorkflow setup page
 
 SFYCUSTOM_FIELD_CLIENT_PRO = Champ "Professionnel" sur fiche client
@@ -67,7 +66,6 @@ Extrafield_invoice_noautosend = Ne pas envoyer automatiquement les factures
 #
 # About page
 #
-About = About
 MMIWorkflowAbout = About MMIWorkflow
 MMIWorkflowAboutPage = MMIWorkflow about page
 
