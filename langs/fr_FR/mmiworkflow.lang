@@ -29,12 +29,17 @@ MMIWorkflowSetup = MMIWorkflow setup
 MMIWorkflowSetupPage = MMIWorkflow setup page
 
 SFYCUSTOM_FIELD_CLIENT_PRO = Champ "Professionnel" sur fiche client
-MMI_ORDER_1CLIC_INVOICE_SHIPPING = Expédition (et facture) en 1 clic
+
+MMI_ORDER_1CLIC = Gestion des expéditions et factures en 1 clic
+MMI_ORDER_1CLIC_INVOICE_SHIPPING = Activer les expédition (et facture) en 1 clic
 MMI_ORDER_1CLIC_INVOICE_SHIPPING_AUTOCLOSE = Clôturer l'expé automatiquement
 MMI_ORDER_1CLIC_INVOICE = Facturer automatiquement (par défaut à l'expédition)
 MMI_ORDER_1CLIC_INVOICE_DELAY = Décaler la facturation à la livraison
 MMI_ORDER_1CLIC_INVOICE_EMAIL_AUTO = Envoyer automatiquement la facture par email
 MMI_ORDER_1CLIC_INVOICE_EMAIL_AUTO_NOPRO = Ne pas envoyer la facture automatiquement pour les pro
+MMI_ORDER_1CLIC_API_SHIPPING = Activer les expéditions auto via l'API REST
+MMI_INVOICE_EMAILSEND = Bouton pour envoyer des factures par email directement
+
 MMI_ORDER_SET_EXPE_OK = Bouton dans commande "Marquer tous les produits expédiés" (champ supplémentaire)
 MMI_SHIPPING_PDF_MESSAGE = Message à afficher en en-tête des expéditions
 MAIN_GENERATE_SHIPMENT_WITH_PICTURE = Afficher les images sur les PDF des expéditions
@@ -42,13 +47,18 @@ SHIPPING_PDF_HIDE_BATCH = Cacher le numéro de lot dans les expéditions
 SHIPPING_PDF_HIDE_WEIGHT_AND_VOLUME = Cacher la colonne poids/volume dans les expéditions
 SHIPPING_PDF_HIDE_DELIVERY_DATE = Cacher la date de livraison dans les expéditions
 SHIPPING_PDF_ANTIGASPI = Afficher anti-gaspi sur les expéditions
+
+MMI_DRAFTIFY = Remettre en brouillon
 MMI_INVOICE_DRAFTIFY = Permettre aux admin de remettre les factures payées en brouillon
 MMI_INVOICE_DRAFTIFY_TYPES = Types de factures que l'on peut remettre en brouillon
 MMI_ORDER_DRAFTIFY = Permettre aux admin de remettre les commandes expédiées en brouillon
-MMI_INVOICE_EMAILSEND = Bouton pour envoyer des factures par email directement
+
+MMI_1CT = Gestion des erreurs d'arrondi
 MMI_1CT_FIX = Bouton pour corriger les erreurs de "1ct"
 MMI_1CT_DIFFLIMIT = Seuil de tolérance (3ct par défaut) pour recalculer les lignes de commande/facture et faire matcher avec le réglement (0.03 conseillé, correspondant à la totalité des bugs liés à Prestashop)
 MMI_VAT_TX_FIX = Bouton pour corriger les erreurs de synchro de TVA
+
+MMI_MISC = Divers
 SFY_ALERT_ORDER_NOT_SHIPPED = Activer une alerte sur la liste des expeditions si il existe des commandes validées
 MMI_MOVEMENT_LIST_ENHANCE = AJouter des informations (client, commande...) dans le liste des mouvements de stock
 SFYCUSTOM_LOCK = Bloquer la validation des commandes si lignes libres

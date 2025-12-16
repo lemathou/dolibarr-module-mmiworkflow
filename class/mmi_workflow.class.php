@@ -397,7 +397,7 @@ class mmi_workflow extends mmi_generic_1_0
 				}
 			}
 		}
-		//var_dump($lots2);
+		//var_dump($lots2); //die();
 		
 		$sql = '';
 
@@ -446,6 +446,7 @@ class mmi_workflow extends mmi_generic_1_0
 				
 				if ($batch_conf==0) {
 					// Premier parcours, tri par lot par DDM
+					//var_dump($product->stock_warehouse);
 					foreach($product->stock_warehouse as $stock) {
 						foreach($stock->detail_batch as $batch=>$productbatch) {
 							if (!isset($productlots[$batch]))
@@ -453,7 +454,7 @@ class mmi_workflow extends mmi_generic_1_0
 						}
 					}
 					asort($productlots);
-					//var_dump($productlots);
+					//var_dump($productlots); die();
 
 					if (isset($lots2[$product->id])) {
 						foreach($lots2[$product->id] as $batch=>&$batch_detail) {
@@ -528,7 +529,7 @@ class mmi_workflow extends mmi_generic_1_0
 				$batch_line[$i]['detail'] = $sub_qty; // array of details
 				$batch_line[$i]['qty'] = $subtotalqty;
 				$batch_line[$i]['ix_l'] = $line->id;
-				//var_dump($batch_line[$i]);
+				//var_dump($batch_line[$i]); die();
 			} else { // @todo finir propduits
 				foreach($product->stock_warehouse as $warehouse_id=>$stock) {
 					//var_dump($stock);
@@ -560,7 +561,7 @@ class mmi_workflow extends mmi_generic_1_0
 			$totalqty += $subtotalqty;
 		}
 
-		//var_dump($batch_line[2]);
+		//var_dump($batch_line, $array_options); die();
 
 		// Ajout lignes
 		if (!$error) {

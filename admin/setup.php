@@ -29,12 +29,14 @@ require_once '../main_load.inc.php';
 $arrayofparameters = array(
 	'SFYCUSTOM_FIELD_CLIENT_PRO'=>array('type'=>'yesno','enabled'=>1),
 
+	'MMI_ORDER_1CLIC'=>array('type'=>'separator','enabled'=>1),
 	'MMI_ORDER_1CLIC_INVOICE_SHIPPING'=>array('type'=>'yesno','enabled'=>1),
 	'MMI_ORDER_1CLIC_INVOICE_SHIPPING_AUTOCLOSE'=>array('type'=>'yesno','enabled'=>1),
 	'MMI_ORDER_1CLIC_INVOICE'=>array('type'=>'yesno','enabled'=>1),
 	'MMI_ORDER_1CLIC_INVOICE_DELAY'=>array('type'=>'yesno','enabled'=>1),
 	'MMI_ORDER_1CLIC_INVOICE_EMAIL_AUTO'=>array('type'=>'yesno','enabled'=>1),
 	'MMI_ORDER_1CLIC_INVOICE_EMAIL_AUTO_NOPRO'=>array('type'=>'yesno','enabled'=>1),
+	'MMI_ORDER_1CLIC_API_SHIPPING'=>array('type'=>'yesno','enabled'=>1),
 	'MMI_INVOICE_EMAILSEND'=>array('type'=>'yesno','enabled'=>1),
 
 	'SFYCUSTOM_LOCK'=>array('type'=>'yesno', 'enabled'=>1),
@@ -49,13 +51,16 @@ $arrayofparameters = array(
 	'MMI_SHIPPING_PDF_LABEL_BOLD'=>array('type'=>'yesno','enabled'=>1),
 	'MMI_ORDER_SET_EXPE_OK'=>array('type'=>'yesno','enabled'=>1),
 
+	'MMI_DRAFTIFY'=>array('type'=>'separator','enabled'=>1),
 	'MMI_INVOICE_DRAFTIFY'=>array('type'=>'yesno', 'enabled'=>1),
 	'MMI_INVOICE_DRAFTIFY_TYPES'=>array('type'=>'string', 'enabled'=>1),
 
+	'MMI_1CT'=>array('type'=>'separator', 'enabled'=>1),
 	'MMI_1CT_FIX'=>array('type'=>'yesno', 'enabled'=>1),
 	'MMI_1CT_DIFFLIMIT'=>array('type'=>'decimal', 'enabled'=>1, 'default'=>0.03),
 	'MMI_VAT_TX_FIX'=>array('type'=>'yesno', 'enabled'=>1),
 
+	'MMI_MISC'=>array('type'=>'separator', 'enabled'=>1),
 	'SFY_ALERT_ORDER_NOT_SHIPPED'=>array('type'=>'yesno', 'enabled'=>1),
 
 	'MMI_MOVEMENT_LIST_ENHANCE'=>array('type'=>'yesno', 'enabled'=>1),
