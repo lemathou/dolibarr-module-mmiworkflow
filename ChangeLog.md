@@ -7,3 +7,8 @@ Initial version
 ## 1.1
 
 Retrieve API to automatically create shipping with the right batches.
+
+## 1.1.1
+
+Organize setup parameters.
+

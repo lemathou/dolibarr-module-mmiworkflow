@@ -27,7 +27,11 @@ require_once '../env.inc.php';
 require_once '../main_load.inc.php';
 
 $arrayofparameters = array(
+	'Customer'=>array('type'=>'separator','enabled'=>1),
 	'SFYCUSTOM_FIELD_CLIENT_PRO'=>array('type'=>'yesno','enabled'=>1),
+
+	'Order'=>array('type'=>'separator','enabled'=>1),
+	'SFYCUSTOM_LOCK'=>array('type'=>'yesno', 'enabled'=>1),
 
 	'MMI_ORDER_1CLIC'=>array('type'=>'separator','enabled'=>1),
 	'MMI_ORDER_1CLIC_INVOICE_SHIPPING'=>array('type'=>'yesno','enabled'=>1),
@@ -39,9 +43,7 @@ $arrayofparameters = array(
 	'MMI_ORDER_1CLIC_API_SHIPPING'=>array('type'=>'yesno','enabled'=>1),
 	'MMI_INVOICE_EMAILSEND'=>array('type'=>'yesno','enabled'=>1),
 
-	'SFYCUSTOM_LOCK'=>array('type'=>'yesno', 'enabled'=>1),
-	'MMI_ORDER_DRAFTIFY'=>array('type'=>'yesno', 'enabled'=>1),
-
+	'Shipping'=>array('type'=>'separator','enabled'=>1),
 	'SHIPPING_PDF_HIDE_WEIGHT_AND_VOLUME'=>array('type'=>'yesno','enabled'=>1),
 	'SHIPPING_PDF_HIDE_BATCH'=>array('type'=>'yesno','enabled'=>1), // MMI Hack
 	'SHIPPING_PDF_HIDE_DELIVERY_DATE'=>array('type'=>'yesno','enabled'=>1), // MMI Hack
@@ -52,6 +54,7 @@ $arrayofparameters = array(
 	'MMI_ORDER_SET_EXPE_OK'=>array('type'=>'yesno','enabled'=>1),
 
 	'MMI_DRAFTIFY'=>array('type'=>'separator','enabled'=>1),
+	'MMI_ORDER_DRAFTIFY'=>array('type'=>'yesno', 'enabled'=>1),
 	'MMI_INVOICE_DRAFTIFY'=>array('type'=>'yesno', 'enabled'=>1),
 	'MMI_INVOICE_DRAFTIFY_TYPES'=>array('type'=>'string', 'enabled'=>1),
 
