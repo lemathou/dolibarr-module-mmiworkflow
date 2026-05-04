@@ -71,9 +71,48 @@ class InterfaceMMIWorkflowTriggers extends MMITriggers
 				break;
 			
 			case 'ORDER_VALIDATE':
-				// If we have a shipping, we set the status to "sending"
-				$object->fk_status = Commande::STATUS_SHIPMENTONPROCESS;
+				// Si la commande avait des expéditions liées (cas d'une commande "en cours d'expédition"
+				// rouverte en brouillon puis revalidée), on la repasse automatiquement en cours d'expédition.
+				$object->fetchObjectLinked();
+				if (empty($object->linkedObjectsIds['shipping']))
+					break;
 
+				$sql = 'UPDATE '.MAIN_DB_PREFIX.'commande SET fk_statut='.Commande::STATUS_SHIPMENTONPROCESS.'
+					WHERE rowid='.((int) $object->id);
+				$object->db->query($sql);
+				$object->status = Commande::STATUS_SHIPMENTONPROCESS;
+
+				// Auto-classification "expédiée" si tout est livré, à l'image du module natif workflow
+				// (déclencheurs SHIPPING_VALIDATE / SHIPPING_CLOSED).
+				$useValidated = getDolGlobalString('WORKFLOW_ORDER_CLASSIFY_SHIPPED_SHIPPING');
+				$useClosed = getDolGlobalString('WORKFLOW_ORDER_CLASSIFY_SHIPPED_SHIPPING_CLOSED');
+				if (!$useValidated && !$useClosed)
+					break;
+				// Si _SHIPPING activé, on compte les expéditions dès leur validation,
+				// sinon uniquement les expéditions clôturées.
+				$minStatus = $useValidated ? 1 : 2;
+
+				$qtyshipped = [];
+				$qtyordred = [];
+				if (!empty($object->linkedObjects['shipping'])) {
+					foreach ($object->linkedObjects['shipping'] as $shipping) {
+						if ($shipping->status < $minStatus || !is_array($shipping->lines) || count($shipping->lines) == 0)
+							continue;
+						foreach ($shipping->lines as $shippingline) {
+							$qtyshipped[$shippingline->fk_product] += $shippingline->qty;
+						}
+					}
+				}
+				if (is_array($object->lines)) {
+					foreach ($object->lines as $orderline) {
+						if (!getDolGlobalString('STOCK_SUPPORTS_SERVICES') && $orderline->product_type > 0)
+							continue;
+						$qtyordred[$orderline->fk_product] += $orderline->qty;
+					}
+				}
+				if (count(array_diff_assoc($qtyordred, $qtyshipped)) == 0) {
+					$object->setStatut(Commande::STATUS_CLOSED, $object->id, 'commande', 'ORDER_CLOSE');
+				}
 				break;
 
 			// Reception
