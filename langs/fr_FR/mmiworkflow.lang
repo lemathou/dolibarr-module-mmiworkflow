@@ -98,7 +98,6 @@ MMI1ClickOrderInvoiceShipping = 1 Clic Facture & Expé
 MMI1ClickOrderInvoiceShippingConfirm = Êtes-vous certain de vouloir FActurer et Expédier ?
 MMIInvoiceEmailSend = Envoi express email
 MMI1ctFix = Fix Bug 1ct
-MMI1ctFix = Fix Bug 1ct
 MMISetExpeOK = Marquer "expédié tout"
 MMISetExpeOKNotRight = Vous devez avoir le droit de créer une expédition pour modifier ce statut
 
