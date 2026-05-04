@@ -23,4 +23,5 @@ ORDER_VALIDATE trigger: when re-validating an order that was reopened from "ship
 - Lang fr_FR: remove duplicated `MMI1ctFix` translation key.
 - Module descriptor: fix `description` / `descriptionlong` to point at the `ModuleMMIWorkflowDesc` translation key instead of the literal placeholder, and fix typo (`aléliorations` → `améliorations`) in fr_FR / en_US lang files.
 - Lang: drop modulebuilder boilerplate keys (`MMIWORKFLOW_MYPARAM*`, `MyPageName`, `MyWidget`, `MyWidgetDescription`) that were never referenced.
+- Lang en_US: actually translate the file to English (was a French copy of fr_FR with only the admin/about scaffolding in English).
 

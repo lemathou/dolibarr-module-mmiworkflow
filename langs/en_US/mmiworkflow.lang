@@ -18,16 +18,60 @@
 #
 
 # Module label 'ModuleMMIWorkflowName'
-ModuleMMIWorkflowName = Amélioration Workflow
+ModuleMMIWorkflowName = Workflow Enhancements
 # Module description 'ModuleMMIWorkflowDesc'
-ModuleMMIWorkflowDesc = Ensemble de paramètres et améliorations du workflow Devis/Commande/Facture/Expé, expédition/facturation en 1 clic, facturation à la livraison, envoi automatique de facture par email, etc.
+ModuleMMIWorkflowDesc = Set of settings and improvements for the Quote/Order/Invoice/Shipping workflow: 1-click shipping and invoicing, invoicing on delivery, automatic invoice sending by email, etc.
 
 #
 # Admin page
 #
 MMIWorkflowSetup = MMIWorkflow setup
-Settings = Settings
 MMIWorkflowSetupPage = MMIWorkflow setup page
+
+SFYCUSTOM_FIELD_CLIENT_PRO = "Professional" field on customer record
+
+MMI_ORDER_1CLIC = 1-click shipping and invoicing
+MMI_ORDER_1CLIC_INVOICE_SHIPPING = Enable 1-click shipping (and invoice)
+MMI_ORDER_1CLIC_INVOICE_SHIPPING_AUTOCLOSE = Auto-close the shipment
+MMI_ORDER_1CLIC_INVOICE = Auto-create invoice (default at shipment creation)
+MMI_ORDER_1CLIC_INVOICE_DELAY = Delay invoicing until delivery
+MMI_ORDER_1CLIC_INVOICE_EMAIL_AUTO = Auto-send the invoice by email
+MMI_ORDER_1CLIC_INVOICE_EMAIL_AUTO_NOPRO = Do not auto-send invoice for professional customers
+MMI_ORDER_1CLIC_API_SHIPPING = Enable auto shipment creation through the REST API
+MMI_INVOICE_EMAILSEND = Button to send invoices by email directly
+
+MMI_ORDER_SET_EXPE_OK = Button on order "Mark all products shipped" (extra field)
+MMI_SHIPPING_PDF_MESSAGE = Message to display in the shipment PDF header
+MAIN_GENERATE_SHIPMENT_WITH_PICTURE = Display product images on shipment PDFs
+SHIPPING_PDF_HIDE_BATCH = Hide batch number on shipments
+SHIPPING_PDF_HIDE_WEIGHT_AND_VOLUME = Hide the weight/volume column on shipments
+SHIPPING_PDF_HIDE_DELIVERY_DATE = Hide the delivery date on shipments
+SHIPPING_PDF_ANTIGASPI = Display anti-waste notice on shipments
+
+MMI_DRAFTIFY = Re-open as draft
+MMI_INVOICE_DRAFTIFY = Allow admins to re-open paid invoices as draft
+MMI_INVOICE_DRAFTIFY_TYPES = Invoice types that can be re-opened as draft
+MMI_ORDER_DRAFTIFY = Allow admins to re-open shipped orders as draft
+
+MMI_1CT = Rounding error handling
+MMI_1CT_FIX = Button to fix "1ct" rounding errors
+MMI_1CT_DIFFLIMIT = Tolerance threshold (default 3ct) used to recompute order/invoice lines so the total matches the payment (0.03 recommended, covers the full range of Prestashop sync issues)
+MMI_VAT_TX_FIX = Button to fix VAT sync errors
+
+MMI_MISC = Misc
+SFY_ALERT_ORDER_NOT_SHIPPED = Show an alert on the shipment list when validated orders are not shipped yet
+MMI_MOVEMENT_LIST_ENHANCE = Add information (customer, order...) to the stock movement list
+SFYCUSTOM_LOCK = Block order validation if free lines exist
+MMI_SHIPPING_PDF_LABEL_BOLD = Bold labels on shipments
+
+#
+# Extrafields
+#
+Extrafield_recpt_ok = Fully received
+Extrafield_expe_ok = Fully shipped
+Extrafield_client_pro = Professional
+Extrafield_emailsent = Sent by email
+Extrafield_invoice_noautosend = Do not auto-send invoices
 
 #
 # About page
@@ -35,3 +79,21 @@ MMIWorkflowSetupPage = MMIWorkflow setup page
 About = About
 MMIWorkflowAbout = About MMIWorkflow
 MMIWorkflowAboutPage = MMIWorkflow about page
+
+#
+# Buttons
+#
+MMIInvoiceDraftify = Re-open as draft
+MMI1ClickOrderInvoiceShipping = 1-click invoice & shipping
+MMI1ClickOrderInvoiceShippingConfirm = Are you sure you want to invoice and ship?
+MMIInvoiceEmailSend = Quick email send
+MMI1ctFix = Fix 1ct bug
+MMISetExpeOK = Mark "fully shipped"
+MMISetExpeOKNotRight = You need the permission to create a shipment to change this status
+
+#
+# Messages
+#
+OrderInValidatedStatusAlert = Some orders have no shipment: %s
+ErrorProductStockUnavailable = Insufficient stock for product: %s
+SfCstCannotValidWithFreeLine = Free line(s) detected — validation not allowed
