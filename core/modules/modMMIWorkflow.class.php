@@ -63,9 +63,9 @@ class modMMIWorkflow extends DolibarrModules
 		$this->name = preg_replace('/^mod/i', '', get_class($this));
 
 		// Module description, used if translation string 'ModuleMMIWorkflowDesc' not found (MMIWorkflow is name of module).
-		$this->description = "MMIWorkflowDescription";
+		$this->description = "ModuleMMIWorkflowDesc";
 		// Used only if file README.md and README-LL.md not found.
-		$this->descriptionlong = "MMIWorkflowDescription";
+		$this->descriptionlong = "ModuleMMIWorkflowDesc";
 
 		// Author
 		$this->editor_name = 'MMI Mathieu Moulin iProspective';

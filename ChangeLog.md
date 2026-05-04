@@ -21,4 +21,5 @@ ORDER_VALIDATE trigger: when re-validating an order that was reopened from "ship
 - Cleanup: remove duplicated `1ct_fix` action handler block in `actions_mmiworkflow.class.php`.
 - Triggers: consolidate `SHIPPING_*` cases in MMIWorkflowTriggers, restrict `expe_ok` recomputation to events that actually change shipped quantities (`CREATE`, `MODIFY`, `VALIDATE`, `DELETE`); drop `BILLED`, `CLOSED`, `REOPEN` which had no effect on quantities.
 - Lang fr_FR: remove duplicated `MMI1ctFix` translation key.
+- Module descriptor: fix `description` / `descriptionlong` to point at the `ModuleMMIWorkflowDesc` translation key instead of the literal placeholder, and fix typo (`aléliorations` → `améliorations`) in fr_FR / en_US lang files.
 

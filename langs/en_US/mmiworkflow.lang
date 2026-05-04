@@ -20,7 +20,7 @@
 # Module label 'ModuleMMIWorkflowName'
 ModuleMMIWorkflowName = Amélioration Workflow
 # Module description 'ModuleMMIWorkflowDesc'
-ModuleMMIWorkflowDesc = Ensemble de paramètres et aléliorations du workflow  Devis/Commande/Facture/Expé, expédition/facturation en 1 clic, facturation à la livraison, envoi automatique de facture par email, etc.
+ModuleMMIWorkflowDesc = Ensemble de paramètres et améliorations du workflow Devis/Commande/Facture/Expé, expédition/facturation en 1 clic, facturation à la livraison, envoi automatique de facture par email, etc.
 
 #
 # Admin page
