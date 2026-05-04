@@ -84,7 +84,7 @@ MMIWorkflowAboutPage = MMIWorkflow about page
 # Permissions
 #
 MMIWorkflowPermissionOrderDraftify = Re-open shipped orders as draft
-MMIWorkflowPermissionInvoiceDraftify = Re-open shipped invoices as draft
+MMIWorkflowPermissionInvoiceDraftify = Re-open paid invoices as draft
 
 #
 # Buttons
