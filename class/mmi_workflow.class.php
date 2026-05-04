@@ -68,7 +68,7 @@ class mmi_workflow extends mmi_generic_1_0
 
 		// Send invoice by email if Option true, not already sent and invoice validated correctly (closes & paid) !
 		// STOP if not auto send
-		if (empty($conf->global->MMI_ORDER_1CLIC_INVOICE_EMAIL_AUTO))
+		if (!getDolGlobalString('MMI_ORDER_1CLIC_INVOICE_EMAIL_AUTO'))
 			return;
 
 		// Customer
@@ -78,7 +78,7 @@ class mmi_workflow extends mmi_generic_1_0
 		// OR specified not to send auto to pro (module option + thirdparty check pro field)
 		if (
 			!empty($thirdparty->array_options['options_invoice_noautosend'])
-			|| (!empty($conf->global->MMI_ORDER_1CLIC_INVOICE_EMAIL_AUTO_NOPRO) && !empty($thirdparty->array_options['options_pro']))
+			|| (getDolGlobalString('MMI_ORDER_1CLIC_INVOICE_EMAIL_AUTO_NOPRO') && !empty($thirdparty->array_options['options_pro']))
 			)
 			return;
 
@@ -119,7 +119,7 @@ class mmi_workflow extends mmi_generic_1_0
 			return;
 		//var_dump($row->paid);
 
-		$difflimit = !empty($conf->global->MMI_1CT_DIFFLIMIT) ?$conf->global->MMI_1CT_DIFFLIMIT :0.03;
+		$difflimit = getDolGlobalString('MMI_1CT_DIFFLIMIT') ?: 0.03;
 		$diff = $object->total_ttc-$row->paid;
 		$diffround = round($diff, 2);
 		$diffabs = abs($diffround);
@@ -186,7 +186,7 @@ class mmi_workflow extends mmi_generic_1_0
 			return;
 		
 		//var_dump($row->paid, $order->total_ttc);
-		$difflimit = !empty($conf->global->MMI_1CT_DIFFLIMIT) ?$conf->global->MMI_1CT_DIFFLIMIT :0.03;
+		$difflimit = getDolGlobalString('MMI_1CT_DIFFLIMIT') ?: 0.03;
 		$diff = $object->total_ttc-$row->paid;
 		$diffround = round($diff, 2);
 		$diffabs = abs($diffround);
@@ -253,13 +253,13 @@ class mmi_workflow extends mmi_generic_1_0
 		$_POST['receiver'] = $thirdparty->nom.' <'.$thirdparty->email.'>';
 		//var_dump($_POST['receiver']); die();
 		$_POST['fromtype'] = 'company'; // @todo modifier ! mettre le responsable du client s'il y en a un !
-		$_POST['subject'] = 'Votre facture '.$conf->global->MAIN_INFO_SOCIETE_NOM;
+		$_POST['subject'] = 'Votre facture '.getDolGlobalString('MAIN_INFO_SOCIETE_NOM');
 		$_POST['message'] = 'Bonjour '.$thirdparty->nom.",\r\n\r\n"
-			.'Veuillez trouver ci-joint la facture de votre dernier achat chez '.$conf->global->MAIN_INFO_SOCIETE_NOM.','."\r\n"
+			.'Veuillez trouver ci-joint la facture de votre dernier achat chez '.getDolGlobalString('MAIN_INFO_SOCIETE_NOM').','."\r\n"
 			.'en espérant que vous serez satisfait de nos produits'."\r\n\r\n"
 			.($order ?'Réf Commande: '.$order->ref."\r\n\r\n" :'')
 			.'A bientôt !'."\r\n\r\n"
-			.'L\'équipe '.$conf->global->MAIN_INFO_SOCIETE_NOM."\r\n";
+			.'L\'équipe '.getDolGlobalString('MAIN_INFO_SOCIETE_NOM')."\r\n";
 		$toselect = [$invoice->id];
 		$uploaddir = DOL_DOCUMENT_ROOT.'/../documents/facture';
 		require DOL_DOCUMENT_ROOT.'/core/actions_massactions.inc.php';
@@ -619,9 +619,9 @@ class mmi_workflow extends mmi_generic_1_0
 				}
 				// Auto close shipping
 				if (
-					!empty($conf->global->MMI_ORDER_1CLIC_INVOICE_SHIPPING_AUTOCLOSE)
-					|| (!empty($conf->global->MMIPAYMENTS_CAISSE_USER) && $conf->global->MMIPAYMENTS_CAISSE_USER==$user->id)
-					|| (!empty($conf->global->MMIPAYMENTS_CAISSE_COMPANY) && $conf->global->MMIPAYMENTS_CAISSE_COMPANY==$order->thirdparty->id)
+					getDolGlobalString('MMI_ORDER_1CLIC_INVOICE_SHIPPING_AUTOCLOSE')
+					|| (getDolGlobalString('MMIPAYMENTS_CAISSE_USER') && getDolGlobalString('MMIPAYMENTS_CAISSE_USER')==$user->id)
+					|| (getDolGlobalString('MMIPAYMENTS_CAISSE_COMPANY') && getDolGlobalString('MMIPAYMENTS_CAISSE_COMPANY')==$order->thirdparty->id)
 				) {
 					$result =  $object->setClosed();
 					if ($result<0) {
@@ -676,7 +676,7 @@ class mmi_workflow extends mmi_generic_1_0
 
 		// Création Facture
 		// @todo check if invoice not already done !
-		if (!empty($conf->global->MMI_ORDER_1CLIC_INVOICE) && empty($conf->global->MMI_ORDER_1CLIC_INVOICE_DELAY) && $user->rights->facture->creer) {
+		if (getDolGlobalString('MMI_ORDER_1CLIC_INVOICE') && !getDolGlobalString('MMI_ORDER_1CLIC_INVOICE_DELAY') && $user->rights->facture->creer) {
 			if (! ($invoice = static::order_1clic_invoice($user, $order, true))) {
 				return;
 			}

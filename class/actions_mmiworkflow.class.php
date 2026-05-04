@@ -52,7 +52,7 @@ class ActionsMMIWorkflow extends MMI_Actions_1_0
 		if ($this->in_context($parameters, 'ordercard')) {
 			/** @var Commande $object */
 			// Blocage validation si ligne libre avec produit (pas grave en service)
-			if (!empty($conf->global->SFYCUSTOM_LOCK)) {
+			if (getDolGlobalString('SFYCUSTOM_LOCK')) {
 				$blockValid='';
 				foreach($object->lines as $line) {
 					if (empty($line->fk_product) && $line->product_type == 0 && $line->qty>0) {
@@ -75,7 +75,7 @@ class ActionsMMIWorkflow extends MMI_Actions_1_0
 			// Ajout action Facture & Expé en 1 Clic
 			// SSI statut commande = validé
 			//var_dump($object);
-			if (!empty($conf->global->MMI_ORDER_1CLIC_INVOICE_SHIPPING) && (int)$object->status===Commande::STATUS_VALIDATED) {
+			if (getDolGlobalString('MMI_ORDER_1CLIC_INVOICE_SHIPPING') && (int)$object->status===Commande::STATUS_VALIDATED) {
 				$link = '?id='.$object->id.'&action=1clic_invoice_shipping';
 				// Test si déjà facture
 				// Test si déjà expédition
@@ -83,7 +83,7 @@ class ActionsMMIWorkflow extends MMI_Actions_1_0
 				echo "<a class='butAction' href='".$link."' onclick='return confirm(\"".addslashes($langs->trans("MMI1ClickOrderInvoiceShippingConfirm"))."\")'>".$langs->trans("MMI1ClickOrderInvoiceShipping")."</a>";
 			}
 			// Bouton remise en brouillon
-			if (!empty($conf->global->MMI_ORDER_DRAFTIFY) && $user->rights->mmiworkflow->commande->draftify) {
+			if (getDolGlobalString('MMI_ORDER_DRAFTIFY') && $user->rights->mmiworkflow->commande->draftify) {
 				$q = $this->db->query("SELECT 1
 					FROM ".MAIN_DB_PREFIX."commande c
 					WHERE c.rowid=".$object->id." AND c.fk_statut > 0");
@@ -94,17 +94,17 @@ class ActionsMMIWorkflow extends MMI_Actions_1_0
 				}
 			}
 			// Fix bug 1ct Presta & co
-			if (!empty($conf->global->MMI_1CT_FIX)) {
+			if (getDolGlobalString('MMI_1CT_FIX')) {
 				$link = '?id='.$object->id.'&action=1ct_fix';
 				echo "<a class='butAction' href='".$link."'>".$langs->trans("MMI1ctFix")."</a>";
 			}
 			// Fix bug TVA Presta & co
-			if (!empty($conf->global->MMI_VAT_TX_FIX)) {
+			if (getDolGlobalString('MMI_VAT_TX_FIX')) {
 				$link = '?id='.$object->id.'&action=vat_tx_fix';
 				echo "<a class='butAction' href='".$link."'>".$langs->trans("MMIVATTxFix")."</a>";
 			}
 			// Marquer expédié tout
-			if (!empty($conf->global->MMI_ORDER_SET_EXPE_OK) && (int)$object->status>=Commande::STATUS_VALIDATED && empty(
+			if (getDolGlobalString('MMI_ORDER_SET_EXPE_OK') && (int)$object->status>=Commande::STATUS_VALIDATED && empty(
 				$object->array_options['options_expe_ok'])) {
 				$link = '?id='.$object->id.'&action=expe_ok';
 				// Test si déjà facture
@@ -126,8 +126,8 @@ class ActionsMMIWorkflow extends MMI_Actions_1_0
 			$nocompta = ($q->num_rows);
 
 			// Bouton remise en brouillon
-			if ($conf->global->MMI_INVOICE_DRAFTIFY && $user->rights->mmiworkflow->facture->draftify) {
-				if (!isset($conf->global->MMI_INVOICE_DRAFTIFY_TYPES) || $conf->global->MMI_INVOICE_DRAFTIFY_TYPES=='' || in_array($object->type, explode(',', $conf->global->MMI_INVOICE_DRAFTIFY_TYPES))) {
+			if (getDolGlobalString('MMI_INVOICE_DRAFTIFY') && $user->rights->mmiworkflow->facture->draftify) {
+				if (getDolGlobalString('MMI_INVOICE_DRAFTIFY_TYPES')=='' || in_array($object->type, explode(',', getDolGlobalString('MMI_INVOICE_DRAFTIFY_TYPES')))) {
 					if ($nocompta) {
 						$link = '?facid='.$object->id.'&action=draftify';
 						echo "<a class='butAction' href='".$link."'>".$langs->trans("MMIInvoiceDraftify")."</a>";
@@ -141,7 +141,7 @@ class ActionsMMIWorkflow extends MMI_Actions_1_0
 				}
 			}
 			// Fix bug 1ct Presta & co
-			if ($conf->global->MMI_1CT_FIX) {
+			if (getDolGlobalString('MMI_1CT_FIX')) {
 				if ($nocompta) {
 					$link = '?facid='.$object->id.'&action=1ct_fix';
 					echo "<a class='butAction' href='".$link."'>".$langs->trans("MMI1ctFix")."</a>";
@@ -151,12 +151,12 @@ class ActionsMMIWorkflow extends MMI_Actions_1_0
 				}
 			}
 			// Fix bug TVA Presta & co
-			if ($conf->global->MMI_VAT_TX_FIX) {
+			if (getDolGlobalString('MMI_VAT_TX_FIX')) {
 				$link = '?id='.$object->id.'&action=vat_tx_fix';
 				echo "<a class='butAction' href='".$link."'>".$langs->trans("MMIVATTxFix")."</a>";
 			}
 			// Envoi facture par email
-			if ($conf->global->MMI_INVOICE_EMAILSEND) {
+			if (getDolGlobalString('MMI_INVOICE_EMAILSEND')) {
 				$link = '?facid='.$object->id.'&action=email_send';
 				echo "<a class='butAction' href='".$link."'>".$langs->trans("MMIInvoiceEmailSend")."</a>";
 			}
@@ -182,13 +182,13 @@ class ActionsMMIWorkflow extends MMI_Actions_1_0
 			/** @var Commande $object */
 			// 1 click invoice shipping
 			if ($action === '1clic_invoice_shipping') {
-				if ($conf->global->MMI_ORDER_1CLIC_INVOICE_SHIPPING) {
+				if (getDolGlobalString('MMI_ORDER_1CLIC_INVOICE_SHIPPING')) {
 					mmi_workflow::order_1clic_invoice_shipping($user, $object);
 				}
 			}
 			// Indraft again
 			if ($action === 'draftify') {
-				if ($conf->global->MMI_ORDER_DRAFTIFY && $user->rights->mmiworkflow->commande->draftify) {
+				if (getDolGlobalString('MMI_ORDER_DRAFTIFY') && $user->rights->mmiworkflow->commande->draftify) {
 					// @todo check pas envoyée au client !
 					$sql = "UPDATE ".MAIN_DB_PREFIX."commande c
 						SET c.fk_statut=0
@@ -200,13 +200,13 @@ class ActionsMMIWorkflow extends MMI_Actions_1_0
 			}
 			// Fix bug 1ct Presta & co
 			if ($action === '1ct_fix') {
-				if ($conf->global->MMI_1CT_FIX) {
+				if (getDolGlobalString('MMI_1CT_FIX')) {
 					mmi_workflow::order_1ctfix($user, $object);
 				}
 			}
 			// Fix bug TVA Presta & co
 			if ($action === 'vat_tx_fix') {
-				if ($conf->global->MMI_VAT_TX_FIX) {
+				if (getDolGlobalString('MMI_VAT_TX_FIX')) {
 					mmi_workflow::order_vat_tx_fix($user, $object);
 				}
 			}
@@ -222,32 +222,32 @@ class ActionsMMIWorkflow extends MMI_Actions_1_0
 		elseif ($this->in_context($parameters, 'invoicecard')) {
 			// Indraft again
 			if ($action === 'draftify') {
-				if ($conf->global->MMI_INVOICE_DRAFTIFY && $user->rights->mmiworkflow->facture->draftify) {
+				if (getDolGlobalString('MMI_INVOICE_DRAFTIFY') && $user->rights->mmiworkflow->facture->draftify) {
 					// @todo check pas envoyée au client !
 					mmi_workflow::invoice_draftify($user, $object);
 				}
 			}
 			// Email send
 			if ($action === 'email_send') {
-				if ($conf->global->MMI_INVOICE_EMAILSEND) {
+				if (getDolGlobalString('MMI_INVOICE_EMAILSEND')) {
 					mmi_workflow::invoice_email($user, $object);
 				}
 			}
 			// Fix bug 1ct Presta & co
 			if ($action === '1ct_fix') {
-				if ($conf->global->MMI_1CT_FIX) {
+				if (getDolGlobalString('MMI_1CT_FIX')) {
 					mmi_workflow::invoice_1ctfix($user, $object);
 				}
 			}
 			// Fix bug TVA Presta & co
 			if ($action === 'vat_tx_fix') {
-				if ($conf->global->MMI_VAT_TX_FIX) {
+				if (getDolGlobalString('MMI_VAT_TX_FIX')) {
 					mmi_workflow::invoice_vat_tx_fix($user, $object);
 				}
 			}
 		}
 		// Shippement
-		if ($this->in_context($parameters, 'shipmentlist') && !empty($conf->global->SFY_ALERT_ORDER_NOT_SHIPPED)) {
+		if ($this->in_context($parameters, 'shipmentlist') && getDolGlobalString('SFY_ALERT_ORDER_NOT_SHIPPED')) {
 			$order = new Commande($this->db);
 			$sql="SELECT count(rowid) as cnt FROM ".MAIN_DB_PREFIX."commande where fk_statut=".$order::STATUS_VALIDATED;
 			$resql = $this->db->query($sql);
@@ -291,10 +291,9 @@ class ActionsMMIWorkflow extends MMI_Actions_1_0
 			//	return ($i->ref > $j->ref) ?1 :(($i->ref < $j->ref) ?-1 :0);
 			//});
 			// Bonbons
-			if (!empty($conf->global->MMI_SHIPPING_PDF_MESSAGE)) {
+			if (getDolGlobalString('MMI_SHIPPING_PDF_MESSAGE')) {
 				// Shipping message
-				if (!empty($conf->global->MMI_SHIPPING_PDF_MESSAGE))
-					$object->note_public .= (!empty($object->note_public) ?'<br />' :'').$conf->global->MMI_SHIPPING_PDF_MESSAGE.'<br />';
+				$object->note_public .= (!empty($object->note_public) ?'<br />' :'').getDolGlobalString('MMI_SHIPPING_PDF_MESSAGE').'<br />';
 			}
 		}
 
@@ -318,7 +317,7 @@ class ActionsMMIWorkflow extends MMI_Actions_1_0
 
 		$object_type = get_class($object);
 		//var_dump($object_type); die();
-		if (!empty($conf->global->MMI_SHIPPING_PDF_LABEL_BOLD) && $this->in_context($parameters, 'pdfgeneration') && $object_type=='Expedition') {
+		if (getDolGlobalString('MMI_SHIPPING_PDF_LABEL_BOLD') && $this->in_context($parameters, 'pdfgeneration') && $object_type=='Expedition') {
 			$i = $parameters['i'];
 			//$object = $parameters['object'];
 			if ($object->lines[$i]->ref)

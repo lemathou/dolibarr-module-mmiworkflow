@@ -65,7 +65,7 @@ class InterfaceMMIWorkflowTriggers extends MMITriggers
 		switch ($action) {
 
 			case 'ORDER_CLOSE':
-				if ($conf->global->MMI_ORDER_1CLIC_INVOICE && $conf->global->MMI_ORDER_1CLIC_INVOICE_DELAY) {
+				if (getDolGlobalString('MMI_ORDER_1CLIC_INVOICE') && getDolGlobalString('MMI_ORDER_1CLIC_INVOICE_DELAY')) {
 					mmi_workflow::order_1clic_invoice($user, $object);
 				}
 				break;

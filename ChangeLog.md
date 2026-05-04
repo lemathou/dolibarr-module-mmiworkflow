@@ -27,4 +27,5 @@ ORDER_VALIDATE trigger: when re-validating an order that was reopened from "ship
 - Module descriptor: set `module_parts['substitutions']` to 0 (no `core/substitutions/` directory ships with the module).
 - Permissions: switch hardcoded French permission labels to translation keys (`MMIWorkflowPermissionOrderDraftify`, `MMIWorkflowPermissionInvoiceDraftify`) added in fr_FR and en_US.
 - Permissions: fix label of `MMIWorkflowPermissionInvoiceDraftify` (invoices are paid, not shipped).
+- Codebase: replace direct `$conf->global->XXX` reads by `getDolGlobalString()` / `getDolGlobalInt()` (best practice on Dolibarr ≥ 16). Touches `actions_mmiworkflow.class.php`, `mmi_workflow.class.php`, the workflow trigger and `mmiworkflowindex.php`. The eval string passed to `addExtraField` is left untouched intentionally.
 
