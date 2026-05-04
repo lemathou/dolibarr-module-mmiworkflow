@@ -15,11 +15,13 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+include_once DOL_DOCUMENT_ROOT.'/commande/class/commande.class.php';
+
 dol_include_once('custom/mmicommon/core/triggers/MMITriggers.class.php');
 dol_include_once('/custom/mmiworkflow/class/mmi_workflow.class.php');
 
 /**
- *  Class of triggers for SfyCustom module
+ *  Class of triggers for MMIWorkflow module
  */
 class InterfaceMMIWorkflowTriggers extends MMITriggers
 {
@@ -66,6 +68,50 @@ class InterfaceMMIWorkflowTriggers extends MMITriggers
 				if ($conf->global->MMI_ORDER_1CLIC_INVOICE && $conf->global->MMI_ORDER_1CLIC_INVOICE_DELAY) {
 					mmi_workflow::order_1clic_invoice($user, $object);
 				}
+				break;
+			
+			case 'ORDER_VALIDATE':
+				// If we have a shipping, we set the status to "sending"
+				$object->fk_status = Commande::STATUS_SHIPMENTONPROCESS;
+
+				break;
+
+			// Reception
+			case 'RECEPTION_VALIDATE':
+			case 'RECEPTION_DELETE':
+			case 'RECEPTION_MODIFY':
+				//var_dump($object); //die();
+				if (!in_array($object->origin, ['commandeFournisseur', 'order_supplier']) || empty($object->origin_id))
+					break;
+				mmi_workflow::commande_four_reception($object->origin_id);
+				break;
+				
+			// Supplier orders
+			case 'ORDER_SUPPLIER_MODIFY':
+			case 'ORDER_SUPPLIER_VALIDATE':
+			case 'ORDER_SUPPLIER_APPROVE':
+			case 'ORDER_SUPPLIER_DISPATCH':
+			case 'ORDER_SUPPLIER_RECEIVE':
+				//var_dump($object); die();
+				mmi_workflow::commande_four_reception($object->id);
+				break;
+
+			// Shipping
+			case 'SHIPPING_MODIFY':
+			case 'SHIPPING_VALIDATE':
+			case 'SHIPPING_BILLED':
+			case 'SHIPPING_CLOSED':
+			case 'SHIPPING_REOPEN':
+				if (!in_array($object->origin, ['commande', 'order']) || empty($object->origin_id))
+					break;
+				
+				mmi_workflow::commande_expedition($object->origin_id);
+				break;
+			case 'SHIPPING_DELETE':
+				if (!in_array($object->origin, ['commande', 'order']) || empty($object->origin_id))
+					break;
+				
+				mmi_workflow::commande_expedition($object->origin_id);
 				break;
 
 			default:
