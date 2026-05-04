@@ -80,17 +80,6 @@ MMIWorkflowAbout = About MMIWorkflow
 MMIWorkflowAboutPage = MMIWorkflow about page
 
 #
-# Sample page
-#
-MyPageName = My page name
-
-#
-# Sample widget
-#
-MyWidget = My widget
-MyWidgetDescription = My widget description
-
-#
 # Boutons
 #
 MMIInvoiceDraftify = Réouvrir en Brouillon
