@@ -268,12 +268,12 @@ class modMMIWorkflow extends DolibarrModules
 		$r = 0;
 		// Add here entries to declare new permissions
 		$this->rights[$r][0] = $this->numero . sprintf("%02d", $r + 1); // Permission id (must not be already used)
-		$this->rights[$r][1] = 'Réouvrir les commandes expédiées'; // Permission label
+		$this->rights[$r][1] = 'MMIWorkflowPermissionOrderDraftify'; // Permission label
 		$this->rights[$r][4] = 'commande';
 		$this->rights[$r][5] = 'draftify';
 		$r++;
 		$this->rights[$r][0] = $this->numero . sprintf("%02d", $r + 1); // Permission id (must not be already used)
-		$this->rights[$r][1] = 'Réouvrir les factures expédiées'; // Permission label
+		$this->rights[$r][1] = 'MMIWorkflowPermissionInvoiceDraftify'; // Permission label
 		$this->rights[$r][4] = 'facture';
 		$this->rights[$r][5] = 'draftify';
 		$r++;

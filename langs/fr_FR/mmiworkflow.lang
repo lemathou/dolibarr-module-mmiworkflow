@@ -80,6 +80,12 @@ MMIWorkflowAbout = About MMIWorkflow
 MMIWorkflowAboutPage = MMIWorkflow about page
 
 #
+# Permissions
+#
+MMIWorkflowPermissionOrderDraftify = Réouvrir les commandes expédiées
+MMIWorkflowPermissionInvoiceDraftify = Réouvrir les factures expédiées
+
+#
 # Boutons
 #
 MMIInvoiceDraftify = Réouvrir en Brouillon

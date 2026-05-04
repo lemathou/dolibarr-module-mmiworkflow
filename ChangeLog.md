@@ -25,4 +25,5 @@ ORDER_VALIDATE trigger: when re-validating an order that was reopened from "ship
 - Lang: drop modulebuilder boilerplate keys (`MMIWORKFLOW_MYPARAM*`, `MyPageName`, `MyWidget`, `MyWidgetDescription`) that were never referenced.
 - Lang en_US: actually translate the file to English (was a French copy of fr_FR with only the admin/about scaffolding in English).
 - Module descriptor: set `module_parts['substitutions']` to 0 (no `core/substitutions/` directory ships with the module).
+- Permissions: switch hardcoded French permission labels to translation keys (`MMIWorkflowPermissionOrderDraftify`, `MMIWorkflowPermissionInvoiceDraftify`) added in fr_FR and en_US.
 
