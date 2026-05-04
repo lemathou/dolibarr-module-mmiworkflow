@@ -60,7 +60,7 @@ MMI_VAT_TX_FIX = Button to fix VAT sync errors
 
 MMI_MISC = Misc
 SFY_ALERT_ORDER_NOT_SHIPPED = Show an alert on the shipment list when validated orders are not shipped yet
-MMI_MOVEMENT_LIST_ENHANCE = Add information (customer, order...) to the stock movement list
+MMI_CORE_MOVEMENT_LIST_ENHANCE = Add information (customer, order...) to the stock movement list
 SFYCUSTOM_LOCK = Block order validation if free lines exist
 MMI_SHIPPING_PDF_LABEL_BOLD = Bold labels on shipments
 

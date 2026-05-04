@@ -60,7 +60,7 @@ MMI_VAT_TX_FIX = Bouton pour corriger les erreurs de synchro de TVA
 
 MMI_MISC = Divers
 SFY_ALERT_ORDER_NOT_SHIPPED = Activer une alerte sur la liste des expeditions si il existe des commandes validées
-MMI_MOVEMENT_LIST_ENHANCE = AJouter des informations (client, commande...) dans le liste des mouvements de stock
+MMI_CORE_MOVEMENT_LIST_ENHANCE = AJouter des informations (client, commande...) dans le liste des mouvements de stock
 SFYCUSTOM_LOCK = Bloquer la validation des commandes si lignes libres
 MMI_SHIPPING_PDF_LABEL_BOLD = Libellés des expéditions en gras
 

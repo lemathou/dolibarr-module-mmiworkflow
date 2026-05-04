@@ -28,4 +28,5 @@ ORDER_VALIDATE trigger: when re-validating an order that was reopened from "ship
 - Permissions: switch hardcoded French permission labels to translation keys (`MMIWorkflowPermissionOrderDraftify`, `MMIWorkflowPermissionInvoiceDraftify`) added in fr_FR and en_US.
 - Permissions: fix label of `MMIWorkflowPermissionInvoiceDraftify` (invoices are paid, not shipped).
 - Codebase: replace direct `$conf->global->XXX` reads by `getDolGlobalString()` / `getDolGlobalInt()` (best practice on Dolibarr ≥ 16). Touches `actions_mmiworkflow.class.php`, `mmi_workflow.class.php`, the workflow trigger and `mmiworkflowindex.php`. The eval string passed to `addExtraField` is left untouched intentionally.
+- Settings: rename `MMI_MOVEMENT_LIST_ENHANCE` to `MMI_CORE_MOVEMENT_LIST_ENHANCE` to make it explicit that this is a hidden core option (read in `htdocs/product/stock/class/mouvementstock.class.php`). Requires the matching parent rename to ship together; existing installations need to manually migrate the constant value in `llx_const`.
 

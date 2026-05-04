@@ -66,7 +66,7 @@ $arrayofparameters = array(
 	'MMI_MISC'=>array('type'=>'separator', 'enabled'=>1),
 	'SFY_ALERT_ORDER_NOT_SHIPPED'=>array('type'=>'yesno', 'enabled'=>1),
 
-	'MMI_MOVEMENT_LIST_ENHANCE'=>array('type'=>'yesno', 'enabled'=>1),
+	'MMI_CORE_MOVEMENT_LIST_ENHANCE'=>array('type'=>'yesno', 'enabled'=>1),
 );
 
 require_once '../../mmicommon/admin/mmisetup_1.inc.php';
