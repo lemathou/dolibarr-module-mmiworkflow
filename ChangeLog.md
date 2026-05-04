@@ -19,4 +19,5 @@ ORDER_VALIDATE trigger: when re-validating an order that was reopened from "ship
 ## Unreleased
 
 - Cleanup: remove duplicated `1ct_fix` action handler block in `actions_mmiworkflow.class.php`.
+- Triggers: consolidate `SHIPPING_*` cases in MMIWorkflowTriggers, restrict `expe_ok` recomputation to events that actually change shipped quantities (`CREATE`, `MODIFY`, `VALIDATE`, `DELETE`); drop `BILLED`, `CLOSED`, `REOPEN` which had no effect on quantities.
 

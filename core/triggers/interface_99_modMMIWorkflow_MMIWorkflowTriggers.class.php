@@ -135,21 +135,14 @@ class InterfaceMMIWorkflowTriggers extends MMITriggers
 				mmi_workflow::commande_four_reception($object->id);
 				break;
 
-			// Shipping
+			// Shipping : recompute expe_ok on events that change shipped quantities
+			case 'SHIPPING_CREATE':
 			case 'SHIPPING_MODIFY':
 			case 'SHIPPING_VALIDATE':
-			case 'SHIPPING_BILLED':
-			case 'SHIPPING_CLOSED':
-			case 'SHIPPING_REOPEN':
-				if (!in_array($object->origin, ['commande', 'order']) || empty($object->origin_id))
-					break;
-				
-				mmi_workflow::commande_expedition($object->origin_id);
-				break;
 			case 'SHIPPING_DELETE':
 				if (!in_array($object->origin, ['commande', 'order']) || empty($object->origin_id))
 					break;
-				
+
 				mmi_workflow::commande_expedition($object->origin_id);
 				break;
 
