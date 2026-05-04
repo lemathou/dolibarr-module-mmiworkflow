@@ -204,12 +204,6 @@ class ActionsMMIWorkflow extends MMI_Actions_1_0
 					mmi_workflow::order_1ctfix($user, $object);
 				}
 			}
-			// Fix bug 1ct Presta & co
-			if ($action === '1ct_fix') {
-				if ($conf->global->MMI_1CT_FIX) {
-					mmi_workflow::order_1ctfix($user, $object);
-				}
-			}
 			// Fix bug TVA Presta & co
 			if ($action === 'vat_tx_fix') {
 				if ($conf->global->MMI_VAT_TX_FIX) {
